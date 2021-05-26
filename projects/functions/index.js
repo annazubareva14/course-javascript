@@ -16,8 +16,6 @@
   return value;
 }
 
-let result = returnFirstArgument();
-console.log(result);
 
 /*
  Задание 2:
@@ -37,14 +35,11 @@ console.log(result);
 
 
 function sumWithDefaults(a, b) {
-  if ( b === null) {
-    var b = 100;
-  };
+  b = typeof b !== 'undefined' ?  b : 100;
   
   return a + b;
 }
 
-console.log(sumWithDefaults());
 
 /*
  Задание 3:
@@ -57,15 +52,9 @@ console.log(sumWithDefaults());
 
 
 function returnFnResult(fn) {
-  
-  function fn(result) {
-    return result; 
-  };
-
   return fn();
 }
 
-console.log(returnFnResult());
 
 /*
  Задание 4:
@@ -80,16 +69,15 @@ console.log(returnFnResult());
    console.log(f()); // выведет 12
    console.log(f()); // выведет 13
  */
-function returnCounter(F) {
-  var number;
+function returnCounter(number) {
+
   function F() {
-    return number + 1;
+    return ++number;
   }
-  //почему здесь не нужно возвращать результат выполнения F?
-  //return F();
+
+  return F();
 }
 
-console.log(returnCounter());
 /*
  Задание 5 *:
 
@@ -99,14 +87,12 @@ console.log(returnCounter());
  Пример:
    returnArgumentsArray(1, 2, 3) вернет [1, 2, 3]
  */
-function returnArgumentsArray(arr) {
-  var result = [];
-  arr.forEach(e => {
-    result.push(arguments[e]);
-  });
-    
-  return result;
+function returnArgumentsArray(...args) {
+
+  return args;
+  
 };
+returnArgumentsArray(1, 2, 3)
 
 /* function returnArgumentsArray(...args) {
   return args;
