@@ -16,7 +16,19 @@
    isAllTrue([1, 2, 3, 4, 5], n => n < 10) // вернет true
    isAllTrue([100, 2, 3, 4, 5], n => n < 10) // вернет false
  */
-function isAllTrue(array, fn) {}
+function isAllTrue(array, fn) {
+  try {
+    if (Array.isArray(array) !== true || array.length === 0) {
+      throw new Error('empty array');
+    } else if (typeof fn !== 'function') {
+      throw new Error('fn is not a function');
+    }
+
+    return array.every(fn);
+  } catch (e) {
+    console.log(e.message);
+  }
+}
 
 /*
  Задание 2:
@@ -34,7 +46,19 @@ function isAllTrue(array, fn) {}
    isSomeTrue([1, 2, 30, 4, 5], n => n > 20) // вернет true
    isSomeTrue([1, 2, 3, 4, 5], n => n > 20) // вернет false
  */
-function isSomeTrue(array, fn) {}
+function isSomeTrue(array, fn) {
+  try {
+    if (Array.isArray(array) !== true || array.length === 0) {
+      throw new Error('empty array');
+    } else if (typeof fn !== 'function') {
+      throw new Error('fn is not a function');
+    }
+
+    return array.some(fn);
+  } catch (e) {
+    console.log(e.message);
+  }
+}
 
 /*
  Задание 3:
@@ -47,7 +71,19 @@ function isSomeTrue(array, fn) {}
  3.3: Необходимо выбрасывать исключение в случаях:
    - fn не является функцией (с текстом "fn is not a function")
  */
-function returnBadArguments(fn, ...args) {}
+function returnBadArguments(fn, ...args) {
+  try {
+    if (typeof fn !== 'function') {
+      throw new Error('fn is not a function"');
+    }
+
+    for (let i; i < args.length; i++) {
+      fn(args[i]);
+    }
+  } catch (e) {
+    console.log(e.message);
+  }
+}
 
 /*
  Задание 4:
