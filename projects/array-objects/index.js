@@ -27,16 +27,11 @@ forEach([1, 2, 3], (el) => console.log(el))
    map([1, 2, 3], (el) => el ** 2) // [1, 4, 9]
  */
 function map(array,fn) {
-
   let newArray = [];
-
   for (let i = 0; i < array.length; i++) {
-      newArray.push(array[i]);
-      fn(array[i], i, array);
+      newArray.push(fn(array[i], i, array));
   }
-
   return newArray;
-  
 }
 
 map([1, 2, 3], (el) => el ** 2)
@@ -50,15 +45,12 @@ map([1, 2, 3], (el) => el ** 2)
  Пример:
    reduce([1, 2, 3], (all, current) => all + current) // 6
  */
-function reduce(array, fn) {
-
+function reduce(array, fn, initial) {
+  initial = typeof initial !== 'undefined' ?  b : 'false';
   let sum = 0;
-
   for (let i = 0; i < array.length; i++) {
-    sum += array[i];
-    fn(array[i], i, array);
+    sum += fn(array[i], i, array);
   }
-
   return sum;
 }
 
@@ -73,27 +65,21 @@ reduce([1, 2, 3], (all, current) => all + current)
    upperProps({ name: 'Сергей', lastName: 'Петров' }) вернет ['NAME', 'LASTNAME']
  */
 function upperProps(obj) {
-
   let result = [];
-
   let keys = Object.keys(obj).toUpperCase();
   result.push(keys);
-
   return result;
 }
 upperProps({ name: 'Сергей', lastName: 'Петров' });
 
-
+//второй вариант
 
 function upperProps(obj) {
-
   let result = [];
-
   for (let keys in obj) {
     keys = keys.toUpperCase();
     result.push(keys);
   }
-
   return result;
 }
 upperProps({ name: 'Сергей', lastName: 'Петров' });
