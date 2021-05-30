@@ -25,10 +25,11 @@ function isAllTrue(array, fn) {
     }
 
     return array.every(fn);
-  } catch (e) {
+  } catch(e) {
     console.log(e.message);
   }
 }
+
 
 /*
  Задание 2:
@@ -55,7 +56,7 @@ function isSomeTrue(array, fn) {
     }
 
     return array.some(fn);
-  } catch (e) {
+  } catch(e) {
     console.log(e.message);
   }
 }
@@ -72,15 +73,17 @@ function isSomeTrue(array, fn) {
    - fn не является функцией (с текстом "fn is not a function")
  */
 function returnBadArguments(fn, ...args) {
+  const badArguments = [];
   try {
-    if (typeof fn !== 'function') {
-      throw new Error('fn is not a function"');
-    }
-
     for (let i; i < args.length; i++) {
-      fn(args[i]);
+    fn(args[i]);
+      if (typeof fn !== 'function') {
+        badArguments.push(args[i]);
+        throw new Error('fn is not a function"');
+      }
     }
-  } catch (e) {
+    
+  } catch(e) {
     console.log(e.message);
   }
 }
@@ -102,7 +105,49 @@ function returnBadArguments(fn, ...args) {
    - number не является числом (с текстом "number is not a number")
    - какой-либо из аргументов div является нулем (с текстом "division by 0")
  */
-function calculator(number = 0) {}
+function calculator(number = 0) {
+  if (typeof number !== 'number') {
+    throw new Error('number is not a number');
+  }
+
+  return {
+    sum(...args) {
+      let result = number;
+      for(const arg of args) {
+        result += arg;
+      }
+
+      return result;
+    },
+    dif(...args) {
+      let result = number;
+      for(const arg of args) {
+        result -= arg;
+      }
+
+      return result;
+    },
+    div(...args) {
+      let result = number;
+      for(const arg of args) {
+        if (arg === 0) {
+          throw new Error('division by 0');
+        }
+        result /= arg;
+      }
+
+      return result;
+    },
+    mul(...args) {
+      let result = number;
+      for(const arg of args) {
+        result *= arg;
+      }
+
+      return result;
+    }
+  }
+}
 
 /* При решении задач, постарайтесь использовать отладчик */
 
