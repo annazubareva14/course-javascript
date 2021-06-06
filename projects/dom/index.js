@@ -56,7 +56,7 @@ function findAllPSiblings(where) {
   
   for (let child of children) {
     const nextEl = child.nextElementSibling;
-    if (nextEl == '<p>') {
+    if (nextEl.tagName === 'P') {
       newArray.push(nextEl);
     }
   }
@@ -84,7 +84,7 @@ function findAllPSiblings(where) {
 function findError(where) {
   const result = [];
 
-  for (let child of where.childNodes) {
+  for (let child of where.children) {
     result.push(child.textContent);
   }
 
@@ -105,10 +105,13 @@ function findError(where) {
  */
 function deleteTextNodes(where) {
 
-  for (let child of where.childNodes) {
-    if (child.nodeType === 3) {
-      deleteTextNodes(child);
-    }
+  for (let i = 0; i < where.childNodes.length; i++) {
+   const el = where.childNodes[i];
+
+   if (el.nodeType === 3) {
+     where.removeChild(el);
+     i--;
+   }
   }
 }
 
@@ -123,7 +126,18 @@ function deleteTextNodes(where) {
    После выполнения функции, дерево <span> <div> <b>привет</b> </div> <p>loftchool</p> !!!</span>
    должно быть преобразовано в <span><div><b></b></div><p></p></span>
  */
-function deleteTextNodesRecursive(where) {}
+function deleteTextNodesRecursive(where) {
+  for (let i = 0; i < where.childNodes.length; i++) {
+    const el = where.childNodes[i];
+ 
+    if (el.nodeType === 3) {
+      where.removeChild(el);
+      i--;
+    } else {
+      deleteTextNodesRecursive(el);
+    }
+   }
+}
 
 /*
  Задание 7 *:
