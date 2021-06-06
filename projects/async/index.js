@@ -39,8 +39,26 @@ const homeworkContainer = document.querySelector('#app');
  Массив городов пожно получить отправив асинхронный запрос по адресу
  https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json
  */
-function loadTowns() {}
-
+function loadTowns() {
+  return new Promise((resolve) => {
+    fetch('https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json')
+      .then((response) => {
+        return response.json();
+      })
+      .then((arr) => {
+        arr.sort(function(a, b) {
+          if (a.name > b.name) {
+            return 1;
+          }
+          if (a.name < b.name) {
+            return -1;
+          }
+          return 0;
+        })
+      })
+      resolve();
+   });
+}
 /*
  Функция должна проверять встречается ли подстрока chunk в строке full
  Проверка должна происходить без учета регистра символов
@@ -52,7 +70,9 @@ function loadTowns() {}
    isMatching('Moscow', 'SCO') // true
    isMatching('Moscow', 'Moscov') // false
  */
-function isMatching(full, chunk) {}
+function isMatching(full, chunk) {
+  return full.toLowerCase().includes(chunk.toLowerCase());
+}
 
 /* Блок с надписью "Загрузка" */
 const loadingBlock = homeworkContainer.querySelector('#loading-block');
@@ -67,8 +87,21 @@ const filterInput = homeworkContainer.querySelector('#filter-input');
 /* Блок с результатами поиска */
 const filterResult = homeworkContainer.querySelector('#filter-result');
 
+
 retryButton.addEventListener('click', () => {});
 
 filterInput.addEventListener('input', function () {});
+
+loadTowns()
+
+.then(sortTowns => {
+  filterBlock.style.display = 'block';
+  loadingBlock.classList.add('hidden');
+  loadingFailedBlock.classList.add('hidden');
+
+  filterInput.addEventListener('keydown', function(event) {
+    filterResult.innerHTML = '';
+  })
+})
 
 export { loadTowns, isMatching };

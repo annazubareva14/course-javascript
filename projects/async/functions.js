@@ -12,7 +12,7 @@ function delayPromise(seconds) {
   return new Promise((resolve) =>{
     setTimeout(() => {
         resolve();
-    }, seconds);
+    }, seconds * 1000);
 });
 }
 
@@ -36,8 +36,7 @@ function loadAndSortTowns() {
         return response.json();
       })
       .then((arr) => {
-        var sortedTowns;
-        sortedTowns = arr.sort(function(a, b) {
+        arr.sort(function(a, b) {
           if (a.name > b.name) {
             return 1;
           }
