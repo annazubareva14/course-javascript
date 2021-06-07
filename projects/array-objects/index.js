@@ -45,7 +45,7 @@ function map(array,fn) {
  */
 function reduce(array, fn, initial) {
   let result = initial ? initial : array[0];
-  const firstIter = result ? 0 : 1; 
+  const firstIter = initial ? 0 : 1; 
   for (let i = firstIter; i < array.length; i++) {
     result = fn(result, array[i], i, array);
   }
@@ -69,7 +69,7 @@ function upperProps(obj) {
 
 //второй вариант
 
-function upperProps(obj) {
+/*function upperProps(obj) {
   const result = [];
   for (let keys in obj) {
     keys = keys.toUpperCase();
@@ -77,7 +77,7 @@ function upperProps(obj) {
   }
 
   return result;
-}
+}*/
 
 
 /*
