@@ -17,15 +17,14 @@
    isAllTrue([100, 2, 3, 4, 5], n => n < 10) // вернет false
  */
 function isAllTrue(array, fn) {
-    if (Array.isArray(array) !== true || array.length === 0) {
-      throw new Error('empty array');
-    } else if (typeof fn !== 'function') {
-      throw new Error('fn is not a function');
-    }
+  if (Array.isArray(array) !== true || array.length === 0) {
+    throw new Error('empty array');
+  } else if (typeof fn !== 'function') {
+    throw new Error('fn is not a function');
+  }
 
-    return array.every(fn);
+  return array.every(fn);
 }
-
 
 /*
  Задание 2:
@@ -44,13 +43,13 @@ function isAllTrue(array, fn) {
    isSomeTrue([1, 2, 3, 4, 5], n => n > 20) // вернет false
  */
 function isSomeTrue(array, fn) {
-    if (Array.isArray(array) !== true || array.length === 0) {
-      throw new Error('empty array');
-    } else if (typeof fn !== 'function') {
-      throw new Error('fn is not a function');
-    }
+  if (Array.isArray(array) !== true || array.length === 0) {
+    throw new Error('empty array');
+  } else if (typeof fn !== 'function') {
+    throw new Error('fn is not a function');
+  }
 
-    return array.some(fn);
+  return array.some(fn);
 }
 
 /*
@@ -69,7 +68,7 @@ function returnBadArguments(fn, ...args) {
   if (typeof fn !== 'function') {
     throw new Error('fn is not a function"');
   }
-  for (let i; i < args.length; i++) {
+  for (let i = 0; i < args.length; i++) {
     try {
       fn(args[i]);
     } catch {
@@ -105,7 +104,7 @@ function calculator(number = 0) {
   return {
     sum(...args) {
       let result = number;
-      for(const arg of args) {
+      for (const arg of args) {
         result += arg;
       }
 
@@ -113,7 +112,7 @@ function calculator(number = 0) {
     },
     dif(...args) {
       let result = number;
-      for(const arg of args) {
+      for (const arg of args) {
         result -= arg;
       }
 
@@ -121,7 +120,7 @@ function calculator(number = 0) {
     },
     div(...args) {
       let result = number;
-      for(const arg of args) {
+      for (const arg of args) {
         if (arg === 0) {
           throw new Error('division by 0');
         }
@@ -132,13 +131,13 @@ function calculator(number = 0) {
     },
     mul(...args) {
       let result = number;
-      for(const arg of args) {
+      for (const arg of args) {
         result *= arg;
       }
 
       return result;
-    }
-  }
+    },
+  };
 }
 
 /* При решении задач, постарайтесь использовать отладчик */
