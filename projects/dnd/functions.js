@@ -65,7 +65,7 @@ function delegate(target, fn) {
     if (e.target.tagName == 'BUTTON') {
       fn();
     }
-  })
+  });
 }
 /*
  Задание 7:

@@ -21,11 +21,21 @@ const homeworkContainer = document.querySelector('#app');
 
 document.addEventListener('mousemove', (e) => {});
 
-export function createDiv() {}
+export function createDiv() {
+  const div = document.createElement('div');
+  homeworkContainer.appendChild(div);
+
+  div.draggable = true;
+
+  return div;
+}
 
 const addDivButton = homeworkContainer.querySelector('#addDiv');
 
-addDivButton.addEventListener('click', function () {
-  const div = createDiv();
+addDivButton.addEventListener('click', function (e) {
+  
   homeworkContainer.appendChild(div);
+  if (e.target.classList.contsins('addDiv')) {
+    const div = createDiv();
+  }
 });
