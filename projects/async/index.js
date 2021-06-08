@@ -40,7 +40,6 @@ const homeworkContainer = document.querySelector('#app');
  https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json
  */
 function loadTowns() {
-  return new Promise((resolve) => {
     fetch('https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json')
       .then((response) => {
         return response.json();
@@ -56,8 +55,6 @@ function loadTowns() {
           return 0;
         })
       })
-      resolve();
-   });
 }
 /*
  Функция должна проверять встречается ли подстрока chunk в строке full
