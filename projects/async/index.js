@@ -84,20 +84,34 @@ const filterInput = homeworkContainer.querySelector('#filter-input');
 /* Блок с результатами поиска */
 const filterResult = homeworkContainer.querySelector('#filter-result');
 
-
 retryButton.addEventListener('click', () => {});
 
-filterInput.addEventListener('input', function () {});
 
 loadTowns()
 
-.then(sortTowns => {
+.then((towns) => {
+  let towns = [];
+
   filterBlock.style.display = 'block';
   loadingBlock.classList.add('hidden');
   loadingFailedBlock.classList.add('hidden');
 
   filterInput.addEventListener('keydown', function(event) {
     filterResult.innerHTML = '';
+
+    const fragment = document.createDocumentFragment();
+
+    for (const town of towns) {
+      if (isMatching(town.name, chunk)) {
+        const newDiv = document.createElement('div');
+        newDiv.textContent = town.name;
+        fragment.append(newDiv);
+      }
+    }
+  })
+  .catch(() => {
+    loadingBlock.classList.add('hidden');
+    loadingFailedBlock.classList.remove('hidden');
   })
 })
 
